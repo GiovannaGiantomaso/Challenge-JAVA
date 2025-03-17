@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Paciente</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #cce7ff, #6699cc, #336699);
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            width: 50%;
+            margin: auto;
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            text-align: left;
+            width: 90%;
+            margin: auto;
+        }
+        .btn {
+            padding: 12px 20px;
+            background: #ffa500;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background: #cc8400;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Editar Paciente</h2>
+
+    <form th:action="@{/pacientes/atualizar}" th:object="${paciente}" method="post">
+        <input type="hidden" th:field="*{id}" />
+
+        <label>Nome:</label>
+        <input type="text" th:field="*{nome}" required />
+
+        <label>Data de Nascimento:</label>
+        <input type="date" th:field="*{dataNascimento}" required />
+
+        <label>Telefone:</label>
+        <input type="text" th:field="*{telefone}" required />
+
+        <label>E-mail:</label>
+        <input type="email" th:field="*{email}" required />
+
+        <h3>Endereço</h3>
+
+        <label>CEP:</label>
+        <input type="text" name="cep" th:value="*{endereco?.cep}" required />
+
+        <label>Número:</label>
+        <input type="text" name="numero" th:value="*{endereco?.numero}" required />
+
+        <label>Bairro:</label>
+        <input type="text" name="bairro" th:value="*{endereco?.bairro?.nome}" required />
+
+        <label>Cidade:</label>
+        <input type="text" name="cidade" th:value="*{endereco?.bairro?.cidade?.nome}" required />
+
+        <label>Estado:</label>
+        <input type="text" name="estado" th:value="*{endereco?.bairro?.cidade?.estado?.nome}" required />
+
+        <label>País:</label>
+        <input type="text" name="pais" th:value="*{endereco?.bairro?.cidade?.estado?.pais?.nome}" required />
+
+        <button type="submit" class="btn">Salvar Alterações</button>
+    </form>
+
+    <a href="/pacientes/listar" class="btn">Voltar</a>
+</div>
+
+</body>
+</html>
