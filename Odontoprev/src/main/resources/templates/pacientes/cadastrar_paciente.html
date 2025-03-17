@@ -101,25 +101,42 @@
             margin-top: 20px;
             display: flex;
             justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
         }
 
-        .btn-voltar {
+        .btn-voltar, .btn-menu {
             display: inline-block;
             padding: 12px 24px;
-            background: linear-gradient(to right, #ff4d4d, #ff6666);
-            color: white;
-            text-decoration: none;
             font-size: 16px;
             font-weight: bold;
+            text-decoration: none;
             border-radius: 8px;
             transition: all 0.3s ease;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-            width: 50%;
             text-align: center;
+            flex: 1;
+            min-width: 140px;
+        }
+
+        .btn-voltar {
+            background: linear-gradient(to right, #ff4d4d, #ff6666);
+            color: white;
         }
 
         .btn-voltar:hover {
             background: #cc3333;
+            transform: scale(1.05);
+            box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-menu {
+            background: linear-gradient(to right, #28a745, #45b657);
+            color: white;
+        }
+
+        .btn-menu:hover {
+            background: #218838;
             transform: scale(1.05);
             box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.3);
         }
@@ -209,6 +226,7 @@
 
     <div class="button-container">
         <a href="javascript:history.back()" class="btn-voltar">⬅ Voltar</a>
+        <a href="/principal" class="btn-menu">🏠 Menu Principal</a>
     </div>
 </div>
 

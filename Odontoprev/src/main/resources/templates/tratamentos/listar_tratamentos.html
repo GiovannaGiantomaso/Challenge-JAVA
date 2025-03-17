@@ -83,6 +83,23 @@
             transform: scale(1.05);
             box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.3);
         }
+
+        .btn-voltar {
+            background: #ff6666;
+        }
+
+        .btn-voltar:hover {
+            background: #cc3333;
+        }
+
+        .btn-menu {
+            background: linear-gradient(to right, #0073e6, #3399ff);
+        }
+
+        .btn-menu:hover {
+            background: #005bb5;
+        }
+
     </style>
 </head>
 <body>
@@ -105,7 +122,8 @@
 
     <div class="button-container">
         <a href="/tratamentos/cadastrar" class="btn">Cadastrar Novo Tratamento</a>
-        <a href="javascript:history.back()" class="btn" style="background: #ff6666;">Voltar</a>
+        <a href="javascript:history.back()" class="btn btn-voltar">Voltar</a>
+        <a href="/principal" class="btn btn-menu">🏠 Menu Principal</a>
     </div>
 </div>
 </body>

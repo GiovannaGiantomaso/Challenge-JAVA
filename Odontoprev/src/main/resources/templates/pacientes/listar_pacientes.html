@@ -100,11 +100,10 @@
             box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.3);
         }
 
-        .btn-voltar {
+        .btn-voltar, .btn-menu {
             display: inline-block;
             margin-top: 15px;
             padding: 12px 18px;
-            background: linear-gradient(to right, #ff4d4d, #ff6666);
             color: white;
             font-size: 16px;
             font-weight: bold;
@@ -114,8 +113,22 @@
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
         }
 
+        .btn-voltar {
+            background: linear-gradient(to right, #ff4d4d, #ff6666);
+        }
+
         .btn-voltar:hover {
             background: #cc3333;
+            transform: scale(1.05);
+            box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-menu {
+            background: linear-gradient(to right, #0073e6, #3399ff);
+        }
+
+        .btn-menu:hover {
+            background: #005bb5;
             transform: scale(1.05);
             box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.3);
         }
@@ -157,7 +170,11 @@
             <td th:text="${paciente.email}"></td>
             <td>
                 <a th:href="@{/pacientes/editar/{id}(id=${paciente.id})}" class="btn btn-editar">Editar</a>
-                <a th:href="@{/pacientes/excluir/{id}(id=${paciente.id})}" class="btn btn-excluir" onclick="return confirm('Tem certeza que deseja excluir este paciente?')">Excluir</a>
+
+                <form th:action="@{/pacientes/excluir/{id}(id=${paciente.id})}" method="post" style="display:inline;">
+                    <input type="hidden" name="_method" value="delete"/>
+                    <button type="submit" class="btn btn-excluir" onclick="return confirm('Tem certeza que deseja excluir este paciente?')">Excluir</button>
+                </form>
             </td>
         </tr>
         </tbody>
@@ -166,6 +183,7 @@
     <div class="button-container">
         <a href="/pacientes/cadastrar" class="btn-adicionar">➕ Adicionar Paciente</a>
         <a href="javascript:history.back()" class="btn-voltar">⬅ Voltar</a>
+        <a href="/principal" class="btn-menu">🏠 Menu Principal</a>
     </div>
 </div>
 

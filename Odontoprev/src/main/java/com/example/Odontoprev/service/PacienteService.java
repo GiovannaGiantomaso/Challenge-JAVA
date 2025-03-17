@@ -46,25 +46,24 @@ public class PacienteService {
 
     @Transactional
     public void atualizar(Paciente paciente) {
-        if (paciente.getEndereco() == null || paciente.getEndereco().getId() == null) {
-            throw new RuntimeException("❌ O paciente precisa ter um endereço válido.");
-        }
-
-        Optional<Paciente> pacienteExistente = pacienteRepository.findById(paciente.getId());
-        if (pacienteExistente.isPresent()) {
-            pacienteRepository.atualizarPaciente(
-                    paciente.getId(),
-                    paciente.getNome(),
-                    new java.sql.Date(paciente.getDataNascimento().getTime()),
-                    paciente.getIdGenero(),
-                    paciente.getTelefone(),
-                    paciente.getEmail(),
-                    paciente.getEndereco().getId()
-            );
-        } else {
-            throw new RuntimeException("Paciente não encontrado para atualização.");
-        }
+        pacienteRepository.atualizarPaciente(
+                paciente.getId(),
+                paciente.getNome(),
+                new java.sql.Date(paciente.getDataNascimento().getTime()),
+                paciente.getIdGenero(),
+                paciente.getTelefone(),
+                paciente.getEmail(),
+                paciente.getEndereco().getId()
+        );
     }
 
-
+    @Transactional
+    public void excluir(Long id) {
+        Optional<Paciente> paciente = pacienteRepository.findById(id);
+        if (paciente.isPresent()) {
+            pacienteRepository.deletarPaciente(id);
+        } else {
+            throw new RuntimeException("❌ Paciente não encontrado.");
+        }
+    }
 }

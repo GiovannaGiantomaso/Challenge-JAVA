@@ -102,4 +102,15 @@ public class PacienteController {
         }
     }
 
+    @PostMapping("/excluir/{id}")
+    public String excluirPacientePost(@PathVariable Long id) {
+        pacienteService.excluir(id);
+        return "redirect:/pacientes/listar";
+    }
+
+    @DeleteMapping("/excluir/{id}")
+    public String excluirPaciente(@PathVariable Long id) {
+        pacienteService.excluir(id);
+        return "redirect:/pacientes/listar";
+    }
 }

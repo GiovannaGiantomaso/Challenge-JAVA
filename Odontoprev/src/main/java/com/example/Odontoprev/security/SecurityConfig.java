@@ -22,7 +22,12 @@ public class SecurityConfig {
                         .defaultSuccessUrl("/principal", true)
                         .permitAll()
                 )
-                .logout(logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/"))
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login?logout")
+                        .permitAll()
+                )
+                .rememberMe(remember -> remember.key("uniqueAndSecret").tokenValiditySeconds(86400))
                 .csrf(csrf -> csrf.disable());
 
         return http.build();
