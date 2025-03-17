@@ -19,6 +19,9 @@
             width: 50%;
             margin: auto;
         }
+        h2, h3 {
+            color: #333;
+        }
         input {
             width: 90%;
             padding: 10px;
@@ -34,19 +37,35 @@
             width: 90%;
             margin: auto;
         }
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
         .btn {
             padding: 12px 20px;
-            background: #ffa500;
-            color: white;
             font-size: 16px;
             font-weight: bold;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 20px;
+            transition: 0.3s;
+            text-decoration: none;
+            color: white;
+            display: inline-block;
         }
-        .btn:hover {
+        .btn-save {
+            background: #ffa500;
+        }
+        .btn-save:hover {
             background: #cc8400;
+        }
+        .btn-back {
+            background: #d9534f;
+        }
+        .btn-back:hover {
+            background: #b52b27;
         }
     </style>
 </head>
@@ -90,10 +109,11 @@
         <label>País:</label>
         <input type="text" name="pais" th:value="*{endereco?.bairro?.cidade?.estado?.pais?.nome}" required />
 
-        <button type="submit" class="btn">Salvar Alterações</button>
+        <div class="btn-container">
+            <button type="submit" class="btn btn-save">Salvar Alterações</button>
+            <a href="/pacientes/listar" class="btn btn-back">Voltar</a>
+        </div>
     </form>
-
-    <a href="/pacientes/listar" class="btn">Voltar</a>
 </div>
 
 </body>
