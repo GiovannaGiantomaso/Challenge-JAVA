@@ -123,6 +123,22 @@
         .btn-editar:hover {
             background: #d8963e;
         }
+
+        .btn-excluir {
+            background: #ff4d4d;
+            padding: 8px 12px;
+            font-size: 14px;
+            margin: 5px;
+            border-radius: 6px;
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+            border: none;
+            cursor: pointer;
+            color: white;
+        }
+
+        .btn-excluir:hover {
+            background: #cc3333;
+        }
     </style>
 </head>
 <body>
@@ -144,7 +160,12 @@
                 <td th:text="${tratamento.tipo}"></td>
                 <td th:text="${tratamento.custo}"></td>
                 <td>
-                    <a th:href="@{/tratamentos/editar/{id}(id=${tratamento.id})}" class="btn btn-editar">✏️ Editar</a>
+                    <a th:href="@{/tratamentos/editar/{id}(id=${tratamento.id})}" class="btn btn-editar"> Editar</a>
+
+                    <form th:action="@{/tratamentos/excluir/{id}(id=${tratamento.id})}" method="post" style="display:inline;">
+                        <input type="hidden" name="_method" value="delete"/>
+                        <button type="submit" class="btn btn-excluir" onclick="return confirm('Tem certeza que deseja excluir este tratamento?')">Excluir</button>
+                    </form>
                 </td>
             </tr>
         </table>

@@ -38,6 +38,11 @@ public class TratamentoService {
     }
 
     public void deletar(Long id) {
-        tratamentoRepository.deleteById(id);
+        if (tratamentoRepository.existsById(id)) {
+            tratamentoRepository.deleteById(id);
+        } else {
+            logger.error("Erro: Tentativa de deletar um tratamento inexistente (ID={})", id);
+        }
     }
+
 }

@@ -78,4 +78,11 @@ public class TratamentoController {
 
         return "redirect:/tratamentos/listar";
     }
+
+    @PostMapping("/excluir/{id}")
+    public String excluirTratamento(@PathVariable Long id) {
+        logger.info("Excluindo tratamento com ID={} ", id);
+        tratamentoService.deletar(id);
+        return "redirect:/tratamentos/listar";
+    }
 }
