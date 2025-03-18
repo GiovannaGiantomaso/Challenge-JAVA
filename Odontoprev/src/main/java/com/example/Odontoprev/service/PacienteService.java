@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,5 +66,12 @@ public class PacienteService {
         } else {
             throw new RuntimeException("❌ Paciente não encontrado.");
         }
+    }
+
+    @Transactional
+    public void adicionarTratamentoPaciente(Long idPaciente, Long idTratamento, Date dataTratamento, String observacoes) {
+        java.sql.Date sqlDate = new java.sql.Date(dataTratamento.getTime());
+
+        pacienteRepository.adicionarTratamentoPaciente(idPaciente, idTratamento, sqlDate, observacoes);
     }
 }

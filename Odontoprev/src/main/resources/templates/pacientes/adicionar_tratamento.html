@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Tratamento ao Paciente</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #cce7ff, #6699cc, #336699);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 400px;
+        }
+
+        h2 {
+            color: #336699;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #336699;
+            margin-bottom: 5px;
+        }
+
+        select, input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: #336699;
+            box-shadow: 0px 0px 6px rgba(51, 102, 153, 0.5);
+        }
+
+        .button-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        button, .btn {
+            display: inline-block;
+            padding: 12px;
+            background: linear-gradient(to right, #336699, #6699cc);
+            color: white;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        button:hover, .btn:hover {
+            background: #1e4d7b;
+            transform: scale(1.05);
+            box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-voltar {
+            background: #ff6666;
+            width: 100%;
+        }
+
+        .btn-voltar:hover {
+            background: #cc3333;
+        }
+
+        .btn-menu {
+            background: linear-gradient(to right, #0073e6, #3399ff);
+            width: 100%;
+        }
+
+        .btn-menu:hover {
+            background: #005bb5;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Adicionar Tratamento ao Paciente</h2>
+    <form action="/pacientes/adicionar-tratamento" method="post">
+        <input type="hidden" name="idPaciente" th:value="${paciente.id}">
+
+        <div class="form-group">
+            <label>Paciente:</label>
+            <input type="text" th:value="${paciente.nome}" disabled>
+        </div>
+
+        <div class="form-group">
+            <label for="idTratamento">Selecione o Tratamento:</label>
+            <select name="idTratamento" id="idTratamento" required>
+                <option value="">-- Escolha um Tratamento --</option>
+                <option th:each="tratamento : ${tratamentos}"
+                        th:value="${tratamento.id}"
+                        th:text="${tratamento.descricao}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="dataTratamento">Data do Tratamento:</label>
+            <input type="date" name="dataTratamento" id="dataTratamento" required>
+        </div>
+
+        <div class="form-group">
+            <label for="observacoes">Observações:</label>
+            <input type="text" name="observacoes" id="observacoes" required>
+        </div>
+
+        <button type="submit">Adicionar Tratamento</button>
+    </form>
+
+    <div class="button-container">
+        <a href="javascript:history.back()" class="btn btn-voltar">Voltar</a>
+        <a href="/principal" class="btn btn-menu">🏠 Menu Principal</a>
+    </div>
+</div>
+</body>
+</html>

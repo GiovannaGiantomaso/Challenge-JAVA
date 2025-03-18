@@ -41,6 +41,14 @@ public interface PacienteRepository extends JpaRepository<Paciente, Long> {
     @Procedure(procedureName = "RM553369.PACOTE_GESTAO_SAUDE.DELETAR_PACIENTE_PROC")
     void deletarPaciente(@Param("p_id_paciente") Long idPaciente);
 
+    @Transactional
+    @Procedure(procedureName = "RM553369.PACOTE_GESTAO_SAUDE.ADICIONAR_TRATAMENTO_PACIENTE_PROC")
+    void adicionarTratamentoPaciente(
+            @Param("p_id_paciente") Long idPaciente,
+            @Param("p_id_tratamento") Long idTratamento,
+            @Param("p_data_tratamento") Date dataTratamento,
+            @Param("p_observacoes") String observacoes
+    );
     @Query(value = "SELECT VALIDAR_EMAIL(:email) FROM dual", nativeQuery = true)
     String validarEmail(@Param("email") String email);
 

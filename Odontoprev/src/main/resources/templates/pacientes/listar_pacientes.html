@@ -52,14 +52,25 @@
             background: #e0e0e0;
         }
 
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            align-items: center;
+        }
+
         .btn {
-            padding: 8px 12px;
+            padding: 8px 14px;
             font-size: 14px;
             font-weight: bold;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
         }
 
         .btn-editar {
@@ -78,6 +89,15 @@
 
         .btn-excluir:hover {
             background: #cc3333;
+        }
+
+        .btn-tratamento {
+            background: #0073e6;
+            color: white;
+        }
+
+        .btn-tratamento:hover {
+            background: #005bb5;
         }
 
         .btn-adicionar {
@@ -169,12 +189,20 @@
             <td th:text="${paciente.telefone}"></td>
             <td th:text="${paciente.email}"></td>
             <td>
-                <a th:href="@{/pacientes/editar/{id}(id=${paciente.id})}" class="btn btn-editar">Editar</a>
+                <div class="btn-container">
+                    <a th:href="@{/pacientes/editar/{id}(id=${paciente.id})}" class="btn btn-editar"> Editar</a>
 
-                <form th:action="@{/pacientes/excluir/{id}(id=${paciente.id})}" method="post" style="display:inline;">
-                    <input type="hidden" name="_method" value="delete"/>
-                    <button type="submit" class="btn btn-excluir" onclick="return confirm('Tem certeza que deseja excluir este paciente?')">Excluir</button>
-                </form>
+                    <form th:action="@{/pacientes/excluir/{id}(id=${paciente.id})}" method="post">
+                        <input type="hidden" name="_method" value="delete"/>
+                        <button type="submit" class="btn btn-excluir" onclick="return confirm('Tem certeza que deseja excluir este paciente?')">
+                             Excluir
+                        </button>
+                    </form>
+
+                    <a th:href="@{/pacientes/adicionar-tratamento/{id}(id=${paciente.id})}" class="btn btn-tratamento">
+                         Adicionar Tratamento
+                    </a>
+                </div>
             </td>
         </tr>
         </tbody>

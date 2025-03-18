@@ -1,17 +1,22 @@
 package com.example.Odontoprev.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import com.example.Odontoprev.model.Paciente;
 import com.example.Odontoprev.model.Endereco;
 import com.example.Odontoprev.service.PacienteService;
 import com.example.Odontoprev.service.EnderecoService;
+import com.example.Odontoprev.service.TratamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -23,6 +28,9 @@ public class PacienteController {
 
     @Autowired
     private EnderecoService enderecoService;
+
+    @Autowired
+    private TratamentoService tratamentoService;
 
     @GetMapping
     public String gerenciarPacientes() {
@@ -112,5 +120,45 @@ public class PacienteController {
     public String excluirPaciente(@PathVariable Long id) {
         pacienteService.excluir(id);
         return "redirect:/pacientes/listar";
+    }
+
+    @GetMapping("/adicionar-tratamento/{id}")
+    public String adicionarTratamento(@PathVariable Long id, Model model) {
+        Optional<Paciente> pacienteOpt = pacienteService.buscarPorId(id);
+
+        if (pacienteOpt.isEmpty()) {
+            return "redirect:/pacientes/listar";
+        }
+
+        model.addAttribute("paciente", pacienteOpt.get());
+        model.addAttribute("tratamentos", tratamentoService.listarTodos());
+
+        return "pacientes/adicionar_tratamento";
+    }
+
+    @PostMapping("/adicionar-tratamento")
+    public String salvarTratamentoPaciente(
+            @RequestParam("idPaciente") Long idPaciente,
+            @RequestParam("idTratamento") Long idTratamento,
+            @RequestParam("dataTratamento") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dataTratamento,
+            @RequestParam("observacoes") String observacoes) {
+
+        pacienteService.adicionarTratamentoPaciente(idPaciente, idTratamento, dataTratamento, observacoes);
+        return "redirect:/pacientes/listar";
+    }
+
+    @PostMapping("/api/adicionar-tratamento")
+    public ResponseEntity<String> adicionarTratamento(@RequestBody Map<String, Object> request) {
+        try {
+            Long idPaciente = Long.valueOf(request.get("idPaciente").toString());
+            Long idTratamento = Long.valueOf(request.get("idTratamento").toString());
+            String observacoes = request.get("observacoes").toString();
+            Date dataTratamento = new Date();
+
+            pacienteService.adicionarTratamentoPaciente(idPaciente, idTratamento, dataTratamento, observacoes);
+            return ResponseEntity.ok("✅ Tratamento adicionado com sucesso!");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(" Erro ao adicionar tratamento: " + e.getMessage());
+        }
     }
 }
