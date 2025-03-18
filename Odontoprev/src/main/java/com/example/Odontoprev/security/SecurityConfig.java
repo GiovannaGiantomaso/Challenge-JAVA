@@ -13,22 +13,23 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/index.html", "/login", "/register", "/css/**", "/js/**", "/images/**").permitAll()
-                        .requestMatchers("/pacientes/**", "/tratamentos/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/", "/index", "/login", "/register", "/css/**", "/js/**", "/images/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
                         .defaultSuccessUrl("/principal", true)
+                        .failureUrl("/login?error=true")
                         .permitAll()
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/login?logout")
+                        .logoutSuccessUrl("/login?logout=true")
                         .permitAll()
                 )
-                .rememberMe(remember -> remember.key("uniqueAndSecret").tokenValiditySeconds(86400))
-                .csrf(csrf -> csrf.disable());
+                .rememberMe(remember -> remember
+                        .key("uniqueAndSecret")
+                );
 
         return http.build();
     }

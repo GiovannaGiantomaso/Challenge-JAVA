@@ -16,19 +16,25 @@ public class AuthController {
     }
 
     @GetMapping("/login")
-    public String login() {
+    public String login(Model model, String error, String logout) {
+        if (error != null) {
+            model.addAttribute("erroMensagem", "Usuário ou senha incorretos!");
+        }
+        if (logout != null) {
+            model.addAttribute("logoutMensagem", "Você saiu com sucesso!");
+        }
         return "login";
     }
 
     @GetMapping("/register")
-    public String registerForm(Model model) {
+    public String mostrarCadastro(Model model) {
         model.addAttribute("usuario", new Usuario());
         return "register";
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute Usuario usuario) {
+    public String registrarUsuario(@ModelAttribute Usuario usuario) {
         usuarioService.salvarUsuario(usuario);
-        return "redirect:/login";
+        return "redirect:/login?registrado";
     }
 }

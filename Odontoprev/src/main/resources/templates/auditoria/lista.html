@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registros de Auditoria</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #cce7ff, #6699cc, #336699);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 90%;
+            max-width: 900px;
+            overflow-x: auto;
+        }
+
+        h2 {
+            color: #336699;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        select, button {
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        button {
+            background: #336699;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        button:hover {
+            background: #1e4d7b;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ccc;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        th {
+            background: #336699;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f2f2f2;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 20px;
+            background: #336699;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #1e4d7b;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Registros de Auditoria</h2>
+
+    <form action="/auditoria" method="get">
+        <label for="tabela">Filtrar por tabela:</label>
+        <select name="tabela" id="tabela">
+            <option value="">Todas</option>
+            <option value="PACIENTE">Paciente</option>
+            <option value="TRATAMENTO">Tratamento</option>
+            <option value="SINISTRO">Sinistro</option>
+        </select>
+        <button type="submit">Filtrar</button>
+    </form>
+
+    <div style="overflow-x:auto;">
+        <table>
+            <thead>
+            <tr>
+                <th>ID Auditoria</th>
+                <th>Tabela Afetada</th>
+                <th>Operação</th>
+                <th>Usuário</th>
+                <th>Data</th>
+                <th>ID Registro</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="registro : ${auditoria}">
+                <td th:text="${registro.id}"></td>
+                <td th:text="${registro.tabelaAfetada}"></td>
+                <td th:text="${registro.tipoOperacao}"></td>
+                <td th:text="${registro.usuario}"></td>
+                <td th:text="${#temporals.format(registro.dataOperacao, 'dd/MM/yyyy HH:mm:ss')}"></td>
+                <td th:text="${registro.idRegistro}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <a href="/principal" class="btn">🏠 Menu Principal</a>
+</div>
+</body>
+</html>

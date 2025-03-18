@@ -53,7 +53,7 @@ public class EnderecoService {
             Bairro novoBairro = new Bairro();
             novoBairro.setNome(bairroNome);
             novoBairro.setCidade(cidade);
-            return bairroRepository.save(novoBairro);  // ✅ Retorna o bairro salvo
+            return bairroRepository.save(novoBairro);
         });
 
         return enderecoRepository.findByCepAndNumeroAndBairro(cep, numero, bairro.getId()).orElseGet(() -> {

@@ -3,68 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OdontoCare - Gerenciamento Odontológico</title>
+    <title>OdontoPrev - Gerenciamento Odontológico</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #cce7ff, #6699cc, #336699);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #cce7ff, #6699cc, #336699);
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
         }
+
         .container {
-            background: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            background: #ffffff;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             text-align: center;
-            width: 500px;
+            width: 550px;
         }
-        h1 {
-            color: #336699;
-            font-size: 28px;
-        }
-        p.intro {
-            font-size: 18px;
-            color: #336699;
-            margin-bottom: 30px;
-        }
+
         .logo {
-            width: 100px;
-            height: auto;
+            width: 120px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #2c5787;
+            font-size: 30px;
             margin-bottom: 15px;
         }
+
+        p.intro {
+            font-size: 18px;
+            color: #4f6d8c;
+            margin-bottom: 35px;
+        }
+
         .buttons {
             display: flex;
-            flex-direction: column;
-            gap: 15px;
+            justify-content: center;
+            gap: 20px;
         }
+
         .buttons a {
             text-decoration: none;
-            padding: 12px;
-            border-radius: 5px;
+            padding: 14px 25px;
+            border-radius: 8px;
             color: white;
-            background-color: #336699;
-            display: inline-block;
+            background: linear-gradient(120deg, #336699, #6699cc);
             transition: 0.3s;
-            font-size: 16px;
+            font-size: 17px;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
         }
+
         .buttons a:hover {
-            background-color: #6699cc;
+            background: linear-gradient(120deg, #2b527f, #518dc1);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        footer {
+            margin-top: 30px;
+            color: #888;
+            font-size: 13px;
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <img class="logo" src="https://img.freepik.com/vetores-gratis/cor-azul-dos-dentes-da-caligrafia_78370-4809.jpg?t=st=1741971886~exp=1741975486~hmac=5d968f72b2051434e33d8a4a433afb889aa6b737973a2617161bacf800efe7d8&w=740" alt="Logo OdontoCare">
-    <h1>OdontoPrev - Gerenciamento Odontológico</h1>
-    <p class="intro">Simplifique o gerenciamento de pacientes e tratamentos. Acesse agora para melhorar a experiência no atendimento odontológico.</p>
+    <img class="logo" src="https://img.freepik.com/vetores-gratis/cor-azul-dos-dentes-da-caligrafia_78370-4809.jpg?w=740" alt="Logo OdontoCare">
+    <h1>OdontoPrev</h1>
+    <p class="intro">Gerencie pacientes e tratamentos com eficiência e transforme a qualidade do seu atendimento odontológico.</p>
     <div class="buttons">
-        <a href="/login">Faça Login</a>
-        <a href="/register">Cadastre-se</a>
+        <a href="/login"><i class="fa-solid fa-right-to-bracket"></i> Fazer Login</a>
+        <a href="/register"><i class="fa-solid fa-user-plus"></i> Cadastre-se</a>
     </div>
+    <footer>
+        &copy; 2025 OdontoPrev. Todos os direitos reservados.
+    </footer>
 </div>
 </body>
 </html>
